@@ -20,7 +20,7 @@ git pull
 
 <p align="justify">Or, you can download the repository as a ZIP file by clicking on the green "Code" button at the top of the repository and selecting <a href="https://github.com/gu4re/DailyBash/archive/refs/heads/main.zip">Download ZIP</a>.</p>
 
-## RUN <img src="https://floodframe.com/wp-content/uploads/2018/01/play_icon.png" alt="run-icon" width="40" height="40" align="left"/>
+## RUN & USAGE <img src="https://floodframe.com/wp-content/uploads/2018/01/play_icon.png" alt="run-icon" width="40" height="40" align="left"/>
 
 <p align="justify">It is important to know that as it is mentioned at everywhere, this scripts are only runnable natively in linux or bash environments so keep it in mind. But, I didn't forget you Windows users! If you want to use them in Windows you should check out <a href="https://learn.microsoft.com/en-us/windows/wsl/install">the guide and the official installation of WSL<a> that allow you to use the linux subsystem in Windows so you will be able to use bash natively above Windows OS.</b></p>
 <img src="https://imgur.com/xvXtsvt.png" align="right" alt="example-exec-perms" width="350" height="95"/>
@@ -36,6 +36,8 @@ git pull
 sudo chmod +x your_script.sh
 # Comment: Just an example of how to give execute permissions to a file
 ````
+
+<p align="justify"><i>Also, do not forget to use techniques such as <a href="https://www.geeksforgeeks.org/bash-scripting-working-of-alias/">ALIAS<a> inside your .bashrc profile to access to their functionality from everywhere such as a bash common command!</i></p>
 
 ## ISSUES <img src="https://www.clker.com/cliparts/9/1/4/0/11954322131712176739question_mark_naught101_02.svg.hi.png" alt="issues-icon" width="40" height="40" align="left"/>
 
