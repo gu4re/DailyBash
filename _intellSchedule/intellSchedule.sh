@@ -1,13 +1,13 @@
 while true; do
-	echo -n "¿Estás en la universidad? [s/n] "
+	echo -n "Are you in university? [y/n] "
 	read -k1 -s sn
 	case $sn in
 		n) cls;
 		   while true; do
-		   	echo -n "¿Vas a trabajar? [s/n] "
+		   	echo -n "Are you going to work? [y/n] "
 		   	read -k1 -s sn2
 
-		   	if [ $sn2 = "s" ]
+		   	if [ $sn2 = "y" ]
 		   	then
 
 				if test "$(date +%H)" -ge "19" || test "$(date +%H)" -le "08"; then
@@ -28,10 +28,10 @@ while true; do
 
 			   	osascript -e 'set volume output muted false';
 			        osascript -e 'display alert "Disfruta del tiempo libre"';
-			   	(/Applications/Firefox.app/Contents/MacOS/firefox 'https://anilist.co/' & ) && sleep 1; clear; neofetch; break;
+			   	(/Applications/Firefox.app/Contents/MacOS/firefox 'https://twitter.com' & ) && sleep 1; clear; neofetch; break;
 
 		   	else
-			   	echo -n "Por favor indique una respuesta apropiada: [s/n]";
+			   	echo -n "Please give a valid option: [y/n]";
 			fi
 		   done
 
@@ -55,30 +55,30 @@ while true; do
 		   fi
 
 		   # Reading uni_cal.csv
-		   arr_d=($(cat "/Users/diegopicazo/automators/intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
-		   arr_h=($(cat "/Users/diegopicazo/automators/intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
+		   arr_d=($(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
+		   arr_h=($(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
 
 		   # get_index() function
-		   pos_d=$(/Users/diegopicazo/automators/intellSchedule/get_index.sh ${dia} "${arr_d[@]}");
-		   pos_h=$(/Users/diegopicazo/automators/intellSchedule/get_index.sh ${hora} "${arr_h[@]}");
+		   pos_d=$(_intellSchedule/get_index.sh ${dia} "${arr_d[@]}");
+		   pos_h=$(_intellSchedule/get_index.sh ${hora} "${arr_h[@]}");
 
 		   # Subject where I am
-		   asig=$(cat "/Users/diegopicazo/automators/intellSchedule/uni_cal.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
+		   asig=$(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
 
 		   # Bash-Switch to do some taks or others depending on the Subject
 	           case $asig in
 
-		   	SD)		osascript -e 'display alert "ESTAS EN '$asig'"';;
-		   	SE)		osascript -e 'display alert "ESTAS EN '$asig'"';;
-		   	IA)		osascript -e 'display alert "ESTAS EN '$asig'"';;
-		   	AMPLI)		osascript -e 'display alert "ESTAS EN '$asig'"';;
-		   	LENGUAJES)	osascript -e 'display alert "ESTAS EN '$asig'"';;
+		   	SD)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
+		   	SE)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
+		   	IA)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
+		   	AMPLI)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
+		   	LENGUAJES)	osascript -e 'display alert "YOU ARE IN '$asig'"';;
 
 		   esac
 
 		   cls;
 		   break;;
 
-		*) echo "Por favor introduce "s" o "n"";;
+		*) echo "Please introduce "y" o "n"";;
 	esac
 done
