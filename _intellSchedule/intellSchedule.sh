@@ -50,15 +50,15 @@ while true; do
 		   fi
 
 		   # Reading job_calendar.csv
-		   arr_d=($(cat "_intellSchedule/job_calendar.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
-		   arr_h=($(cat "_intellSchedule/job_calendar.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
+		   arr_d=($(cat "_intellSchedule/example_calendar.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
+		   arr_h=($(cat "_intellSchedule/example_calendar.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
 
 		   # get_index() function
 		   pos_d=$(_intellSchedule/get_index.sh ${day} "${arr_d[@]}");
 		   pos_h=$(_intellSchedule/get_index.sh ${hour} "${arr_h[@]}");
 
 		   # Subject/task where I am
-		   subj=$(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
+		   subj=$(cat "_intellSchedule/example_calendar.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
 
 		   # Bash-Switch to do some taks or others depending on the Subject
 	           case $subj in
