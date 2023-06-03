@@ -1,5 +1,5 @@
 while true; do
-	echo -n "Are you in university? [y/n] "
+	echo -n "Are you in job? [y/n] "
 	read -k1 -s sn
 	case $sn in
 		n) cls;
@@ -11,72 +11,67 @@ while true; do
 		   	then
 
 				if test "$(date +%H)" -ge "19" || test "$(date +%H)" -le "08"; then
-					nshift on;
+					nshift on; # OPTIONAL: MacOS Night Shift ON
 				fi
-
-				osascript -e 'set volume output muted false';
-				spotify play uri spotify:playlist:3nHIT4hewxqSGF9RZcCXWz;
-			   	spotify toggle shuffle;
-	                   	aula_virtual; break;
+				
+				# Put here your fav commands during work out from university or job
+	                   	break;
 
 		   	elif [ $sn2 = "n" ]
 		   	then
 
 				if test "$(date +%H)" -ge "19" || test "$(date +%H)" -le "08"; then
-					nshift on;
+					nshift on; # OPTIONAL: MacOS Night Shift ON
 				fi
-
-			   	osascript -e 'set volume output muted false';
-			        osascript -e 'display alert "Disfruta del tiempo libre"';
-			   	(/Applications/Firefox.app/Contents/MacOS/firefox 'https://twitter.com' & ) && sleep 1; clear; neofetch; break;
-
+				# Put here your fav commands during free time
+				break;
 		   	else
 			   	echo -n "Please give a valid option: [y/n]";
 			fi
 		   done
 
-		   cls;
-                  break;;
+		   clear;
+                   break;;
 
-		s) # Night Shift OFF
+		s) # OPTIONAL: MacOS Night Shift OFF
 		   nshift off;
 
-		   # Mute volume in MacOS
+		   # OPTIONAL: Mute volume in MacOS
 		   osascript -e 'set volume output muted true';
 
 		   # TimeDate now
-		   dia=$(date +%a);
-		   hora=$(date +%H);
+		   day=$(date +%a);
+		   hour=$(date +%H);
 
-		   # Correction Time: Rounding 10:55-10:59 to 11:00
+		   # OPTIONAL Correction Time: Rounding 10:55-10:59 to 11:00
 		   mins=$(date +%M);
 		   if test $mins -ge 55 && test $mins -le 59; then
-			hora=$((hora + 1))
+			hour=$((hour + 1))
 		   fi
 
-		   # Reading uni_cal.csv
-		   arr_d=($(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
-		   arr_h=($(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
+		   # Reading job_calendar.csv
+		   arr_d=($(cat "_intellSchedule/job_calendar.csv" | tr -s ";" " " | awk '{if (NR==1){print " "$1" "$2" "$3" "$4" "$5" "$6" "}}'))
+		   arr_h=($(cat "_intellSchedule/job_calendar.csv" | tr -s ";" " " | awk '{ if (NR==1 || NR==2 || NR==3 || NR==4 || NR==5) print $1}' | cut -d ":" -f 1))
 
 		   # get_index() function
-		   pos_d=$(_intellSchedule/get_index.sh ${dia} "${arr_d[@]}");
-		   pos_h=$(_intellSchedule/get_index.sh ${hora} "${arr_h[@]}");
+		   pos_d=$(_intellSchedule/get_index.sh ${day} "${arr_d[@]}");
+		   pos_h=$(_intellSchedule/get_index.sh ${hour} "${arr_h[@]}");
 
-		   # Subject where I am
-		   asig=$(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
+		   # Subject/task where I am
+		   subj=$(cat "_intellSchedule/uni_cal.csv" | tr -s ";" " " | awk -v a=$pos_d -v b=$pos_h '{ if (NR==b) { print $a; }}')
 
 		   # Bash-Switch to do some taks or others depending on the Subject
-	           case $asig in
-
-		   	SD)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
-		   	SE)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
-		   	IA)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
-		   	AMPLI)		osascript -e 'display alert "YOU ARE IN '$asig'"';;
-		   	LENGUAJES)	osascript -e 'display alert "YOU ARE IN '$asig'"';;
-
+	           case $subj in
+			# Introduce your commands depending on the subject or task you are, in this example, we are displaying a test MacOS alert 
+		   	S1)		osascript -e 'display alert "YOU ARE IN '$subj'"';;
+		   	S2)		osascript -e 'display alert "YOU ARE IN '$subj'"';;
+		   	S3)		osascript -e 'display alert "YOU ARE IN '$subj'"';;
+		   	S4)		osascript -e 'display alert "YOU ARE IN '$subj'"';;
+		   	S5)	osascript -e 'display alert "YOU ARE IN '$subj'"';;
+			# ... variable to your necesities
 		   esac
 
-		   cls;
+		   clear;
 		   break;;
 
 		*) echo "Please introduce "y" o "n"";;
